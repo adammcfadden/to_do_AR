@@ -11,3 +11,16 @@ get('/') do
   @lists = List.all()
   erb(:index)
 end
+
+post('/list/new') do
+  unless params.fetch('list_to_be_added') == ''
+    list = params.fetch('list_to_be_added')
+    new_list = List.new({:name => list, :id => nil})
+    new_list.save()
+    @lists = List.all()
+    erb(:index)
+  else
+    @lists = List.all()
+    erb(:index)
+  end
+end
