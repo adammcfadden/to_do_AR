@@ -1,0 +1,9 @@
+<h1>Welcome to your <b>To-Do list</b></h1>
+<br>
+<ul>
+  <% if @lists.length() > 0 %>
+    <% @lists.each() do |list| %>
+      <li><a href="<%= list.name() %>"><%= list.name() %></a></li>
+    <% end %>
+  <% end %>
+</ul>
