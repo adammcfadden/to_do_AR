@@ -6,6 +6,18 @@ class Task
     @list_id = attributes.fetch(:list_id)
   end
 
+  define_singleton_method(:task_where) do |list_id|
+    returned_tasks = DB.exec("SELECT * FROM tasks WHERE list_id = #{list_id};")
+    tasks = []
+    returned_tasks.each() do |task|
+      description = task.fetch("description")
+      list_id = task.fetch("list_id").to_i()
+      tasks.push(Task.new({:description => description, :list_id => list_id}))
+    end
+    tasks
+  end
+
+
   define_singleton_method(:all) do
     returned_tasks = DB.exec("SELECT * FROM tasks;")
     tasks = []

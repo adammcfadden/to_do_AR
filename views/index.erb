@@ -3,7 +3,15 @@
 <ul>
   <% if @lists.length() > 0 %>
     <% @lists.each() do |list| %>
-      <li><a href="<%= list.name() %>"><%= list.name() %></a></li>
+      <li><a href="<%= list.name() %>/<%= list.id() %>"><%= list.name() %></a></li>
+      <% tasks = Task.task_where(list.id()) %>
+      <% if tasks.length > 0 %>
+        <ul>
+          <% tasks.each() do |task| %>
+            <li><%= task.description() %></li>
+          <% end %>
+        </ul>
+      <% end %>
     <% end %>
   <% end %>
 </ul>
@@ -13,6 +21,6 @@
     <label for="list_to_be_added">Enter a new list here:</label>
     <input type="text" id="list_to_be_added" name="list_to_be_added" class="form-control">
     <br>
-    <button type="submit" name="add_new_list" class="btn btn-primary">Add a New List</button>
+    <button type="submit" name="add_new_list" class="btn btn-primary">Add New List</button>
   </form>
 </div>

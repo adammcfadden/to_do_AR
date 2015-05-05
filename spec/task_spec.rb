@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe(Task) do
   describe(".all") do
@@ -34,6 +35,16 @@ describe(Task) do
       task1 = Task.new({:description => "learn SQL", :list_id => 1})
       task2 = Task.new({:description => "learn SQL", :list_id => 1})
       expect(task1).to(eq(task2))
+    end
+  end
+
+  describe(".task_where") do
+    it("returns all tasks that have a specified list_id") do
+      task1 = Task.new({:description => 'puppies', :list_id => 2})
+      task2 = Task.new({:description => 'kittens', :list_id => 2})
+      task1.save()
+      task2.save()
+      expect(Task.task_where(2)).to(eq([task1, task2]))
     end
   end
 end

@@ -1,0 +1,22 @@
+<h1><%= @list_name %></h1>
+<br>
+<ul>
+  <% if @tasks.length() > 0 %>
+    <% @tasks.each() do |task| %>
+      <li><%= task.description() %></li>
+    <% end %>
+  <% end %>
+</ul>
+<br>
+<div class="form-group">
+  <form action="/<%= @list_name %>/<%= @list_id %>/new_task" method="post">
+    <label for="task_to_be_added">Enter a new task here:</label>
+    <input type="text" id="task_to_be_added" name="task_to_be_added" class="form-control">
+    <br>
+    <button type="submit" name="add_new_task" class="btn btn-primary">Add New Task</button>
+  </form>
+  <br>
+  <form action="/" method="get">
+    <button type="submit" name="return_home"  class="btn btn-primary">Return to all Lists</button>
+  </form>
+</div>
